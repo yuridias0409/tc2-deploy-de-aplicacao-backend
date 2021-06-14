@@ -7,7 +7,7 @@ module.exports = () => {
   const cors = require('cors');
 
   // SETANDO VARIÁVEIS DA APLICAÇÃO
-  app.set('port', process.env.PORT || config.get('server.port'));
+  app.set('port', process.env.PORT);
 
   // MIDDLEWARES
   app.use((req, res, next) => {
