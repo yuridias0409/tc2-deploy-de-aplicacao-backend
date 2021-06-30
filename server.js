@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 
 //establish connection to database
 mongoose.connect(
-    'mongodb+srv://yuri-dias-tc2:7u3QBh6BqXj7iz4@cluster0.jzz9v.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    'mongodb+srv://yuri-dias-tc2:7u3QBh6BqXj7iz4@cluster0.jzz9v.mongodb.net/tc2DB?retryWrites=true&w=majority',
     { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
     (err) => {
         if (err) return console.log("Error: ", err);
