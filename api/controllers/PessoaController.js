@@ -3,6 +3,7 @@ const Pessoa = db.pessoa;
 
 // Adicionar uma nova pessoa
 exports.create = (req, res) => {
+    console.log(req);
     console.log(req.body);
     if (!req.body.nome || !req.body.idade || !req.body.foto) {
         res.status(400).send({ msg: "Requisição incompleta: dados ausentes" });
