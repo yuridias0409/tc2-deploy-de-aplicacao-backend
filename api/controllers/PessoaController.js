@@ -3,17 +3,15 @@ const Pessoa = db.pessoa;
 
 // Adicionar uma nova pessoa
 exports.create = (req, res) => {
-    console.log(req);
-    console.log(req.body);
-    if (!req.body.nome || !req.body.idade || !req.body.foto) {
+    if (!req.query.nome || !req.query.idade || !req.query.foto) {
         res.status(400).send({ msg: "Requisição incompleta: dados ausentes" });
         return;
     }
 
     const pessoa = new Pessoa({
-        nome: req.body.nome,
-        idade: req.body.idade,
-        foto: req.body.foto
+        nome: req.query.nome,
+        idade: req.query.idade,
+        foto: req.query.foto
     });
 
     // Salva no banco
@@ -54,14 +52,14 @@ exports.listOne = (req, res) => {
 
 //Remover uma pessoa
 exports.update = (req, res) => {
-    if (!req.body) {
+    if (!req.query) {
         res.status(400).send({ msg: "Dados inválidos" });
         return;
     }
 
     const id = req.params.id;
 
-    Pessoa.findByIdAndUpdate(id, req.body).then(data => {
+    Pessoa.findByIdAndUpdate(id, req.query).then(data => {
         if (!data) {
             res.status(400).send({ msg: "Não foi possível atualizar a Pessoa" })
         } else {
