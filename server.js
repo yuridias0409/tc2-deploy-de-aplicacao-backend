@@ -1,26 +1,47 @@
-var express = require('express'),
-    app = express(),
-    port = process.env.PORT;
-
+const express = require("express");
 const bodyParser = require("body-parser");
+const cors = require('cors');
 
-app.use(bodyParser.json());
+const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use((req, res, next) => {
+    //Qual site tem permissão de realizar a conexão, no exemplo abaixo está o "*" indicando que qualquer site pode fazer a conexão
+    res.header("Access-Control-Allow-Origin", "*");
+    req.header("Access-Control-Allow-Origin", "*");
+    //Quais são os métodos que a conexão pode realizar na API
+    res.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
+    req.header("Access-Control-Allow-Methods", 'GET,PUT,POST,DELETE');
 
+    app.use(cors())
+    // Parseia também requisições do tipo HTML - application/x-www-form-urlencoded
+    app.use(bodyParser.urlencoded({ extended: true }));
+    app.use(bodyParser.json())
+    next();
+});
 
-const mongoose = require('mongoose');
+// Uma rota, aceitando conexões na raiz e retornando um json simples
+app.get("/", (req, res) => {
+    res.json({ msg: "Está funcionando!" });
+});
 
-//establish connection to database
-mongoose.connect(
-    'mongodb+srv://yuri-dias-tc2:7u3QBh6BqXj7iz4@cluster0.jzz9v.mongodb.net/tc2DB',
-    { useNewUrlParser: true, useUnifiedTopology: true },
-    (err) => {
-        if (err) return console.log("Error: ", err);
-        console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
-    }
-);
+const db = require("./api/models");
+db.mongoose
+    .connect(db.url, {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    })
+    .then(() => {
+        console.log("Conectado ao banco de dados");
+    })
+    .catch(err => {
+        console.log("Não foi possível conectar ao banco de dados", err);
+        process.exit();
+    });
 
 require("./api/routes/PessoaRoute")(app);
 
-app.listen(port);
+// "Executa" o servidor, escutando em uma porta específica.
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Servidor está executando na porta ${PORT}.`);
+});
