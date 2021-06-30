@@ -21,5 +21,6 @@ mongoose.connect(
     }
 );
 
+require("./api/routes/PessoaRoute")(app);
 
 app.listen(port);
