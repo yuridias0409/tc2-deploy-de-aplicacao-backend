@@ -13,8 +13,8 @@ const mongoose = require('mongoose');
 
 //establish connection to database
 mongoose.connect(
-    'mongodb+srv://yuri-dias-tc2:7u3QBh6BqXj7iz4@cluster0.jzz9v.mongodb.net/tc2DB?retryWrites=true&w=majority',
-    { useFindAndModify: false, useUnifiedTopology: true, useNewUrlParser: true, useCreateIndex: true },
+    'mongodb+srv://yuri-dias-tc2:7u3QBh6BqXj7iz4@cluster0.jzz9v.mongodb.net/tc2DB',
+    { useNewUrlParser: true, useUnifiedTopology: true },
     (err) => {
         if (err) return console.log("Error: ", err);
         console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
