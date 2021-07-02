@@ -3,15 +3,15 @@ const Pessoa = db.pessoa;
 
 // Adicionar uma nova pessoa
 exports.create = (req, res) => {
-    if (!req.query.nome || !req.query.idade || !req.query.foto) {
+    if (!req.body.nome || !req.body.idade || !req.body.foto) {
         res.status(400).send({ msg: "Requisição incompleta: dados ausentes" });
         return;
     }
 
     const pessoa = new Pessoa({
-        nome: req.query.nome,
-        idade: req.query.idade,
-        foto: req.query.foto
+        nome: req.body.nome,
+        idade: req.body.idade,
+        foto: req.body.foto
     });
 
     // Salva no banco
