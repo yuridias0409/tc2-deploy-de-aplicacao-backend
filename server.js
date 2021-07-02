@@ -45,7 +45,7 @@ db.mongoose
 require("./api/routes/PessoaRoute")(app);
 
 // "Executa" o servidor, escutando em uma porta específica.
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT;
 app.listen(PORT, () => {
     console.log(`Servidor está executando na porta ${PORT}.`);
 });
