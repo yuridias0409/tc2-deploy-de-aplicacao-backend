@@ -3,19 +3,19 @@ module.exports = app => {
   
     var router = require("express").Router();
   
-    // Insere novo produto
+    // Insere nova pessoa
     router.post("/", pessoa.create);
   
-    // Retorna todos produto
+    // Retorna todas pessoas
     router.get("/", pessoa.listAll);
   
-    // // Retorna o produto dado seu ID
+    // // Retorna a pessoa dado seu ID
     router.get("/:id", pessoa.listOne);
   
-    // // Atualiza o produto dado seu ID
+    // // Atualiza a pessoa dado seu ID
     router.put("/:id", pessoa.update);
   
-    // // Remove um produto dado seu id
+    // // Remove uma pessoa dado seu id
     router.delete("/:id", pessoa.delete);
   
     app.use('/api/pessoa', router);
